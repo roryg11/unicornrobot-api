@@ -1,6 +1,7 @@
 module V1
   class RegistrationController < ApplicationController
     require 'json'
+    skip_before_action :authenticate_user_from_token!
 
     def create
       @user = User.new(user_params)
