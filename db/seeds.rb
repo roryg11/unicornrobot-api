@@ -6,6 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 users = [];
+wtjGroup = UserGroup.create!({name: "When To Jump", url: ""})
 user_one = User.create!({
   email: 'mike@example.com',
   username: 'mike',
@@ -15,7 +16,9 @@ user_one = User.create!({
   jump_to: "entrepeneur",
   jump_from: "finance",
   first_name: "Mike",
-  last_name: "Louis"
+  last_name: "Louis",
+  user_group_id: wtjGroup.id,
+  role: "Admin"
   })
 user_two = User.create!({
   email: 'rory@example.com',
@@ -26,7 +29,9 @@ user_two = User.create!({
   jump_to: "Software development",
   jump_from: "design",
   first_name: "Rory",
-  last_name: "Grant"
+  last_name: "Grant",
+  user_group_id: wtjGroup.id,
+  role: "Admin"
   })
 user_three = User.create!({
   email: 'hanna@example.com',
@@ -37,7 +42,9 @@ user_three = User.create!({
   jump_to: "Non-profit",
   jump_from: "consulting",
   first_name: "Hanna",
-  last_name: "Banana"
+  last_name: "Banana",
+  user_group_id: wtjGroup.id,
+  role: "Admin"
   })
 user_four = User.create!({
   email: 'Kat@example.com',
@@ -48,7 +55,9 @@ user_four = User.create!({
   jump_to: "finance",
   jump_from: "Lacrosse",
   first_name: "Kat",
-  last_name: "Pat"
+  last_name: "Pat",
+  user_group_id: wtjGroup.id,
+  role: "Individual"
   })
 user_five = User.create!({
   email: 'Adam@example.com',
@@ -59,7 +68,9 @@ user_five = User.create!({
   jump_to: "Teaching",
   jump_from: "Pro Kayaker",
   first_name: "Adam",
-  last_name: "schmadam"
+  last_name: "schmadam",
+  user_group_id: wtjGroup.id,
+  role: "Individual"
   })
 user_six = User.create!({
   email: 'Matthew@example.com',
@@ -70,7 +81,9 @@ user_six = User.create!({
   jump_to: "outdoor explorer",
   jump_from: "Hr recruiting",
   first_name: "Matt",
-  last_name: "McMatt"
+  last_name: "McMatt",
+  user_group_id: wtjGroup.id,
+  role: "Ambassador"
   })
 user_seven = User.create!({
   email: 'Jenna@example.com',
@@ -81,6 +94,8 @@ user_seven = User.create!({
   jump_to: "Exercise application",
   jump_from: "Yoga instructor",
   first_name: "Jenna",
-  last_name: "Janna"
+  last_name: "Janna",
+  user_group_id: wtjGroup.id,
+  role: "Ambassador"
   })
 users.push(user_one, user_two, user_three, user_four, user_five, user_six, user_seven);

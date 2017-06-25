@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users, only: []
   namespace :v1, defaults: {format: :json} do
-    resource :login, only: [:create, :destroy], controller: :sessions
+    get '/users/current_user', to: 'users#profile'
+    resource :login, only: [:create], controller: :sessions
+    resource :logout, only: [:destroy], controller: :sessions
     resources :users, only: [:create, :index, :show, :update, :destroy]
     resources :interests, only: [:create, :destroy]
   end

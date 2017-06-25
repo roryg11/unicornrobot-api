@@ -1,16 +1,21 @@
 module V1
   class UsersController < ApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:create, :index, :show, :update, :destroy]
+    skip_before_action :authenticate_user_from_token!, only: [:create, :index, :show, :update, :destroy, :current_user]
 
     # POST /v1/users
     #  creates a user
     def create
       @user = User.new(user_params)
+      @user.assignUserGroup()
       if @user.save
         render json: @user, serializer: V1::UserSerializer, status: 201
       else
         render json: { error: t('user_create_error') }, status: :unprocessable_entity
       end
+    end
+
+    def profile
+      render json: current_user, serialize: V1::UserSerializer, status: 201
     end
 
     # GET /v1/users

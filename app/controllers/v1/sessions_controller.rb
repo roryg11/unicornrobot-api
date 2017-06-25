@@ -9,10 +9,20 @@ module V1
       return invalid_login_attempt unless @user
 
       if @user.valid_password?(params[:password])
-        sign_in :user, @user
+        sign_in @user
         render json: @user, serializer: SessionSerializer, root: nil
       else
         invalid_login_attempt
+      end
+    end
+
+    # DELETE /v1/logout
+    def destroy
+      isSignedOut = sign_out(current_user)
+      if isSignedOut
+        render json: isSignedOut
+      else
+        render json: {error: t('sessions_controller.user_could_not_be_signed_out')}, Status: :unprocessable_entity
       end
     end
 
