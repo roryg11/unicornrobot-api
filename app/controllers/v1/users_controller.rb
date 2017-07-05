@@ -35,7 +35,6 @@ module V1
 
     def update
       @user = User.find_by_id(params[:id])
-      # user_params = user_params.to_h
       if @user.update(user_params)
         render json: @user, serializer: V1::UserSerializer, status: 204
       else
