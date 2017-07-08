@@ -19,7 +19,6 @@ module V1
     end
 
     def profile
-      puts current_user.interests
       render json: current_user, serializer: V1::UserSerializer, status: 201
     end
 
@@ -39,14 +38,19 @@ module V1
     end
 
     def update
+<<<<<<< HEAD
       @user = User.find_by_id(params[:id])
       errors = t('user_update_error')
       if @user.valid? == false
         errors = @user.errors.full_messages.uniq
       end
       puts @user.interests
+=======
+      @user = User.find_by_id(params[:id]);
+>>>>>>> 8050b00c98ac80a138b1fb6df68cbc5cdf8e0621
       if @user.update(user_params)
-        render json: @user, serializer: V1::UserSerializer, status: 204
+        puts "IN THE USER UPDATE SUCESS"
+        render json: @user, serializer: V1::UserSerializer
       else
         render json: { error: errors }, status: :unprocessable_entity
       end
@@ -58,15 +62,10 @@ module V1
       head :no_content
     end
 
-    # will need to add a delete so that admin users can delete accounts
-    # also need update so that users can update their own profile information
 
     private
 
     def user_params
-      #  this is a weird hack because the tests were failing
-      #  should be params.require, but the json was coming back with {"params": {"user"}}
-      # params["params"].require(:user).permit(:email, :username, :password, :password_confirmation)
       params.require(:user).permit(
         :first_name,
         :last_name,
