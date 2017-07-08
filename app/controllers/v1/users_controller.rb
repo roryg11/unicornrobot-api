@@ -7,15 +7,20 @@ module V1
     def create
       @user = User.new(user_params)
       @user.assignUserGroup()
+      errors = t('user_create_error')
+      if @user.valid? == false
+        errors = @user.errors.full_messages.uniq
+      end
       if @user.save
         render json: @user, serializer: V1::UserSerializer, status: 201
       else
-        render json: { error: t('user_create_error') }, status: :unprocessable_entity
+        render json: { error: errors}, status: :unprocessable_entity
       end
     end
 
     def profile
-      render json: current_user, serialize: V1::UserSerializer, status: 201
+      puts current_user.interests
+      render json: current_user, serializer: V1::UserSerializer, status: 201
     end
 
     # GET /v1/users
@@ -35,10 +40,15 @@ module V1
 
     def update
       @user = User.find_by_id(params[:id])
+      errors = t('user_update_error')
+      if @user.valid? == false
+        errors = @user.errors.full_messages.uniq
+      end
+      puts @user.interests
       if @user.update(user_params)
         render json: @user, serializer: V1::UserSerializer, status: 204
       else
-        render json: { error: t('user_update_error') }, status: :unprocessable_entity
+        render json: { error: errors }, status: :unprocessable_entity
       end
     end
 

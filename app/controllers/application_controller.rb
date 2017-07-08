@@ -32,7 +32,6 @@ class ApplicationController < ActionController::API
 
     user_id = auth_token.split(":").first
     user = User.where(id: user_id).first
-    puts "IN authenticate method"
 
     if user && Devise.secure_compare(user.access_token, auth_token)
       #  User can access

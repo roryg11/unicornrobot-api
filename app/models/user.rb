@@ -8,8 +8,10 @@ class User < ActiveRecord::Base
 
   has_many :interests, dependent: :destroy
 
-  validates :username, presence: true
-  validates :email, presence: true
+  # validates :username, presence: true
+  validates :email, presence: true, uniqueness: true
+  # validates :password, confirmation: true
+
 
   def setAdminRole
     self.role = "ADMIN"

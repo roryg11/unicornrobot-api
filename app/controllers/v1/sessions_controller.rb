@@ -5,7 +5,7 @@ module V1
 
     # POST /v1/login
     def create
-      @user = User.find_for_database_authentication(email: params[:username])
+      @user = User.find_for_database_authentication(email: params[:email])
       return invalid_login_attempt unless @user
 
       if @user.valid_password?(params[:password])
@@ -22,7 +22,7 @@ module V1
       if isSignedOut
         render json: isSignedOut
       else
-        render json: {error: t('sessions_controller.user_could_not_be_signed_out')}, Status: :unprocessable_entity
+        render json: {error: t('sessions_controller.user_could_not_be_signed_out')}, status: :unprocessable_entity
       end
     end
 
@@ -30,7 +30,7 @@ module V1
 
     def invalid_login_attempt
       warden.custom_failure!
-      render json: {error: t('sessions_controller.invalid_login_attempt')}, Status: :unprocessable_entity
+      render json: {error: t('sessions_controller.invalid_login_attempt')}, status: :unprocessable_entity
     end
   end
 end

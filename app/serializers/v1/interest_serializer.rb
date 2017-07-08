@@ -1,6 +1,5 @@
 module V1
   class InterestSerializer<ActiveModel::Serializer
-    attributes :description
-    has_one :user
+    attributes :id, :description, :user_id
   end
 end
