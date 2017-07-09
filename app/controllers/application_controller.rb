@@ -21,10 +21,6 @@ class ApplicationController < ActionController::API
     end
   end
 
-  def signed_in
-    
-  end
-
   private
 
   def authenticate_with_auth_token auth_token

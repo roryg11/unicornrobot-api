@@ -39,8 +39,7 @@ module V1
     end
 
     def update
-      puts current_user
-      if current_user.role != roles.ADMIN || current_user.id != params[:id]
+      if current_user.role != roles.ADMIN ||  current_user.id != params[:id]
         render json: { error:  t('unauthorized action')}, status: 401
       end
 
