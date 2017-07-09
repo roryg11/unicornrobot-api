@@ -10,25 +10,28 @@ class User < ActiveRecord::Base
 
   # validates :username, presence: true
   validates :email, presence: true, uniqueness: true
-  # validates :password, confirmation: true
+  validates :password, length: { minimum: 8 }, unless: "password.nil?"
+  validates :password, presence: true, if: "id.nil?"
+  # validates :password, confirmation: true, if: "id.nil?"
+  # we want the above for changing your password when you update, but not sure
 
 
   def setAdminRole
-    self.role = "ADMIN"
+    self.role = roles.ADMIN
     save
   end
 
   def setAmbassadorRole
-    self.role = "AMBASSADOR"
+    self.role = roles.AMBASSADOR
     save
   end
 
   def setIndividual
-    self.role = "INDIVIDUAL"
+    self.role = roles.INDIVIDUAL
     save
   end
 
-  def getRoles
+  def roles
     {
       ADMIN: "Admin",
       AMBASSADOR: "Ambassador",

@@ -1,6 +1,7 @@
 module V1
   class UsersController < ApplicationController
     skip_before_action :authenticate_user_from_token!, only: [:create, :index, :show, :update, :destroy, :current_user]
+    before_action :signed_in
 
     # POST /v1/users
     #  creates a user
@@ -38,20 +39,20 @@ module V1
     end
 
     def update
-<<<<<<< HEAD
+      puts current_user
+      if current_user.role != roles.ADMIN || current_user.id != params[:id]
+        render json: { error:  t('unauthorized action')}, status: 401
+      end
+
       @user = User.find_by_id(params[:id])
       errors = t('user_update_error')
-      if @user.valid? == false
-        errors = @user.errors.full_messages.uniq
-      end
-      puts @user.interests
-=======
-      @user = User.find_by_id(params[:id]);
->>>>>>> 8050b00c98ac80a138b1fb6df68cbc5cdf8e0621
-      if @user.update(user_params)
-        puts "IN THE USER UPDATE SUCESS"
+      @user.update(user_params)
+
+      if @user.valid?
         render json: @user, serializer: V1::UserSerializer
       else
+        puts @user.errors.full_messages
+        errors = @user.errors.full_messages.uniq
         render json: { error: errors }, status: :unprocessable_entity
       end
     end
