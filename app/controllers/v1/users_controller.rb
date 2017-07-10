@@ -1,7 +1,6 @@
 module V1
   class UsersController < ApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:create, :index, :show, :update, :destroy, :current_user]
-    before_action :signed_in
+    skip_before_action :authenticate_user_from_token!, only: [:create, :index, :show, :destroy]
 
     # POST /v1/users
     #  creates a user
@@ -20,6 +19,7 @@ module V1
     end
 
     def profile
+      puts current_user.id
       render json: current_user, serializer: V1::UserSerializer, status: 201
     end
 
@@ -39,18 +39,19 @@ module V1
     end
 
     def update
-      if current_user.role != roles.ADMIN ||  current_user.id != params[:id]
+      errors = t('user_update_error')
+
+      if current_user.role != current_user.roles[:ADMIN] && current_user.id.to_i != params[:id].to_i
         render json: { error:  t('unauthorized action')}, status: 401
+        return
       end
 
       @user = User.find_by_id(params[:id])
-      errors = t('user_update_error')
       @user.update(user_params)
 
       if @user.valid?
         render json: @user, serializer: V1::UserSerializer
       else
-        puts @user.errors.full_messages
         errors = @user.errors.full_messages.uniq
         render json: { error: errors }, status: :unprocessable_entity
       end
