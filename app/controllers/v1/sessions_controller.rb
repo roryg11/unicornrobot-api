@@ -30,7 +30,7 @@ module V1
 
     def invalid_login_attempt
       warden.custom_failure!
-      render json: {error: t('sessions_controller.invalid_login_attempt')}, status: :unprocessable_entity
+      render json: {error: t('Email and password combination not found')}, status: 404
     end
   end
 end
