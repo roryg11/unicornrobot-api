@@ -26,7 +26,7 @@ module RailsWtjApi
     # need to change this so that it can only take requests from your client
     config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
       allow do
-        origins '*'
+        origins 'https://murmuring-chamber-30135.herokuapp.com'
         resource '*',
                  headers: :any,
                  methods: [:get, :put, :post, :patch, :delete, :options]
