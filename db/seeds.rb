@@ -18,7 +18,8 @@ user_one = User.create!({
   first_name: "Mike",
   last_name: "Louis",
   user_group_id: wtjGroup.id,
-  role: "Admin"
+  role: "Admin",
+  interests: ["entrepeneurship", "jumping", "sports" ]
   })
 user_two = User.create!({
   email: 'rory@example.com',
@@ -31,7 +32,9 @@ user_two = User.create!({
   first_name: "Rory",
   last_name: "Grant",
   user_group_id: wtjGroup.id,
-  role: "Admin"
+  role: "Admin",
+  interests: ["technology", "graphic design", "sports" ]
+
   })
 user_three = User.create!({
   email: 'hanna@example.com',
@@ -44,7 +47,8 @@ user_three = User.create!({
   first_name: "Hanna",
   last_name: "Banana",
   user_group_id: wtjGroup.id,
-  role: "Admin"
+  role: "Admin",
+  interests: ["sustainability", "marketing", "finance" ]
   })
 user_four = User.create!({
   email: 'Kat@example.com',
@@ -57,7 +61,8 @@ user_four = User.create!({
   first_name: "Kat",
   last_name: "Pat",
   user_group_id: wtjGroup.id,
-  role: "Individual"
+  role: "Individual",
+  interests: ["manufacturing", "architecture", "finance" ]
   })
 user_five = User.create!({
   email: 'Adam@example.com',
@@ -70,7 +75,8 @@ user_five = User.create!({
   first_name: "Adam",
   last_name: "schmadam",
   user_group_id: wtjGroup.id,
-  role: "Individual"
+  role: "Individual",
+  interests: ["manufacturing", "architecture", "finance" ]
   })
 user_six = User.create!({
   email: 'Matthew@example.com',
@@ -83,7 +89,9 @@ user_six = User.create!({
   first_name: "Matt",
   last_name: "McMatt",
   user_group_id: wtjGroup.id,
-  role: "Ambassador"
+  role: "Ambassador",
+  interests: ["counseling", "health/wellness", "music" ]
+
   })
 user_seven = User.create!({
   email: 'Jenna@example.com',
@@ -96,6 +104,7 @@ user_seven = User.create!({
   first_name: "Jenna",
   last_name: "Janna",
   user_group_id: wtjGroup.id,
-  role: "Ambassador"
+  role: "Ambassador",
+  interests: ["counseling", "health/wellness", "music" ]
   })
 users.push(user_one, user_two, user_three, user_four, user_five, user_six, user_seven);

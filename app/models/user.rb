@@ -6,8 +6,6 @@ class User < ActiveRecord::Base
 
   after_create :update_access_token!
 
-  has_many :interests, dependent: :destroy
-
   # validates :username, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, unless: "password.nil?"
