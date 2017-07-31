@@ -1,6 +1,6 @@
 module V1
   class UsersController < ApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:create, :index, :show, :destroy]
+    skip_before_action :authenticate_user_from_token!, only: [:create, :show]
 
     # POST /v1/users
     #  creates a user
@@ -76,7 +76,8 @@ module V1
         :jump_from,
         :password,
         :password_confirmation,
-        :username
+        :username,
+        :interests
       )
     end
 

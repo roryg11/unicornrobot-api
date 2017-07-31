@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
 
   after_create :update_access_token!
 
-  # validates :username, presence: true
   validates :email, presence: true, uniqueness: true
   validates :password, length: { minimum: 8 }, unless: "password.nil?"
   validates :password, presence: true, if: "id.nil?"
@@ -54,7 +53,7 @@ class User < ActiveRecord::Base
 
   def generate_access_token
     loop do
-      token = "#{self.id}:Devise.friendly_token"
+      token = "#{self.id}:#{Devise.friendly_token}"
       break token unless User.where(access_token: token).first
     end
   end
