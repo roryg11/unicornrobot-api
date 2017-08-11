@@ -41,6 +41,13 @@ class User < ActiveRecord::Base
     save
   end
 
+  def send_password_reset
+    generate_token(:reset_password_token)
+    self.reset_password_sent_at = Time.zone.now
+    save!
+    UserMailer.password_reset(self).deliver_now
+  end
+
   private
 
   #  Need to change to something more secure if you want to keep this token secure
@@ -56,6 +63,12 @@ class User < ActiveRecord::Base
       token = "#{self.id}:#{Devise.friendly_token}"
       break token unless User.where(access_token: token).first
     end
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.urlsafe_base64
+    end while User.exists?(column => self[column])
   end
 
 end

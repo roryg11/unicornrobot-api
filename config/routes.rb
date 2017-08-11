@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resource :login, only: [:create], controller: :sessions
     resource :logout, only: [:destroy], controller: :sessions
     resources :users, only: [:create, :index, :show, :update, :destroy]
-    resources :interests, only: [:create, :destroy]
+    resources :password_resets, only: [:create, :edit, :update]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
