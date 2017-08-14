@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.2.5"
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -13,6 +14,8 @@ gem 'thin'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'rails_12factor', group: :production
+gem 'sendgrid-ruby'
+gem 'dotenv-rails', '~> 1.0.2', :groups => [:development, :test]
 
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'
