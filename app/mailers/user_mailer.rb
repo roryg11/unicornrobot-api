@@ -7,7 +7,7 @@ class UserMailer < ApplicationMailer
   #
   def password_reset(user)
     @user = user
-    @linkUrl = "localhost:3000/resetPasswordConfirmation/#{user.reset_password_token}"
+    @linkUrl = "#{APP_URL}/resetPasswordConfirmation/#{user.reset_password_token}"
     mail :to => user.email, :subject => "Password Reset"
   end
 end

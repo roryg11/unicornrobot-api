@@ -85,4 +85,7 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # setting app url
+  APP_URL = "https://murmuring-chamber-30135.herokuapp.com"
 end

@@ -14,12 +14,12 @@ ActionMailer::Base.smtp_settings = {
 elsif Rails.env.production?
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
-    address:              'smtp.sendgrid.net',
+    address:              'smtp-relay.sendinblue.com',
     port:                 587,
     domain:               'guarded-thicket-54472.herokuapp.com',
-    user_name:            ENV["SENDGRID_USERNAME"],
-    password:             ENV["SENDGRID_PASSWORD"],
-    authentication:       'plain',
+    user_name:            ENV["SENDINBLUE_USERNAME"],
+    password:             ENV["SENDINBLUE_PASSWORD"],
+    authentication:       'login',
     enable_starttls_auto: true
   }
 
