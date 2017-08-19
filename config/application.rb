@@ -20,14 +20,17 @@ module RailsWtjApi
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.autoload_paths += %W(#{config.root}/lib)
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
+
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
     # need to change this so that it can only take requests from your client
     config.middleware.insert_before 'Rack::Runtime', 'Rack::Cors' do
       allow do
-        origins '*'
-        # origins '*https://murmuring-chamber-30135.herokuapp.com'
+        # origins '*'
+        origins '*https://murmuring-chamber-30135.herokuapp.com'
         resource '*',
                  headers: :any,
                  methods: [:get, :put, :post, :patch, :delete, :options]

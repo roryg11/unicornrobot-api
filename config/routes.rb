@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, only: []
   namespace :v1, defaults: {format: :json} do
     get '/users/current_user', to: 'users#profile'
+    get '/blog', to: 'apis#blog'
     resource :login, only: [:create], controller: :sessions
     resource :logout, only: [:destroy], controller: :sessions
     resources :users, only: [:create, :index, :show, :update, :destroy]
