@@ -13,6 +13,7 @@ module V1
         feed = RSS::Parser.parse(rss)
         feed.items.each do |item|
           article = Article.new(item.title, item.link, item.description, item.category, item.content_encoded, item.pubDate)
+          article.parseOutHtml()
           blog_items.push(article)
         end
         render json: blog_items, status: 200

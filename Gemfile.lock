@@ -200,6 +200,7 @@ DEPENDENCIES
   rack-cors
   rails (= 4.2.3)
   rails-api (~> 0.4.0)
+  rails-html-sanitizer
   rails_12factor
   rest-client
   rspec-rails (~> 3.5)

@@ -17,6 +17,10 @@ gem 'rails_12factor', group: :production
 gem 'dotenv-rails', '~> 1.0.2', :groups => [:development, :test]
 gem 'rest-client'
 
+
+# for html parsing the weebly blog_items
+gem 'rails-html-sanitizer'
+
 # Use SCSS for stylesheets
 # gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
