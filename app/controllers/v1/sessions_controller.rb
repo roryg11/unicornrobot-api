@@ -9,8 +9,13 @@ module V1
       return invalid_login_attempt unless @user
 
       if @user.valid_password?(params[:password])
-        sign_in @user
-        render json: @user, serializer: SessionSerializer, root: nil
+        if @user.confirmed_at
+          sign_in @user
+          render json: @user, serializer: SessionSerializer, root: nil
+        else
+          render json: {error: "Please activate your account by following the
+        instructions in the account confirmation email you received to proceed"}, status: :unprocessable_entity
+        end
       else
         invalid_login_attempt
       end

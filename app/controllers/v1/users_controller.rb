@@ -1,6 +1,6 @@
 module V1
   class UsersController < ApplicationController
-    skip_before_action :authenticate_user_from_token!, only: [:create, :show]
+    skip_before_action :authenticate_user_from_token!, only: [:create, :show, :confirm_email]
 
     # POST /v1/users
     #  creates a user
@@ -12,6 +12,7 @@ module V1
         errors = @user.errors.full_messages.uniq
       end
       if @user.save
+        UserMailer.confirm_email(@user).deliver_now
         render json: @user, serializer: V1::UserSerializer, status: 201
       else
         render json: { error: errors}, status: :unprocessable_entity
@@ -61,6 +62,16 @@ module V1
       @user = User.find_by_id(params[:id])
       @user.destroy
       head :no_content
+    end
+
+    def confirm_email
+      user = User.find_by_confirmation_token(params[:id])
+      if user
+        user.email_activate
+        render json: {activated: true}, status: 200
+      else
+        render json: {error: "Either the user does not exist or the email has already been confirmed"}, status: :unprocessable_entity
+      end
     end
 
 

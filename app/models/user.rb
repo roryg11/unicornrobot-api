@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  before_create :generate_confirmation_token!
   after_create :update_access_token!
 
   validates :email, presence: true, uniqueness: true
@@ -48,6 +49,12 @@ class User < ActiveRecord::Base
     UserMailer.password_reset(self).deliver_now
   end
 
+  def email_activate
+    self.unconfirmed_email = false
+    self.confirmation_token = nil
+    save!(:validate => false)
+  end
+
   private
 
   #  Need to change to something more secure if you want to keep this token secure
@@ -71,4 +78,9 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
 
+  def generate_confirmation_token!
+    if self.confirmation_token.blank?
+      generate_token("confirmation_token")
+    end
+  end
 end
