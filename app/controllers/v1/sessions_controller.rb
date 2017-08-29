@@ -9,7 +9,8 @@ module V1
       return invalid_login_attempt unless @user
 
       if @user.valid_password?(params[:password])
-        if @user.confirmed_at
+        puts "USER HAS VALID PASSWORD"
+        if @user.unconfirmed_email == "f"
           sign_in @user
           render json: @user, serializer: SessionSerializer, root: nil
         else
