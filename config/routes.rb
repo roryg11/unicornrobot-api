@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :v1, defaults: {format: :json} do
     get '/users/current_user', to: 'users#profile'
     get '/blog', to: 'apis#blog'
+    get '/events', to: 'apis#events'
     post '/confirmation_email/:id', to: 'users#confirm_email'
     resource :login, only: [:create], controller: :sessions
     resource :logout, only: [:destroy], controller: :sessions

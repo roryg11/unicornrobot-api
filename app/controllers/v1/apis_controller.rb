@@ -20,6 +20,12 @@ module V1
       end
     end
 
+    def events
+      link = "https://www.eventbriteapi.com/v3/users/me/owned_events/?token=#{ENV["EVENTBRITE_TOKEN"]}"
+      events = RestClient.get(link);
+      render json: events, status: 200
+    end
+
 
   end
 end
