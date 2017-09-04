@@ -22,8 +22,14 @@ module V1
 
     def events
       link = "https://www.eventbriteapi.com/v3/users/me/owned_events/?token=#{ENV["EVENTBRITE_TOKEN"]}"
-      events = RestClient.get(link);
-      render json: events, status: 200
+      eventResponse = JSON.parse(RestClient.get(link));
+      eventItems = []
+      eventResponse["events"].each do |eventData|
+        puts eventData["description"]["text"].class
+        event = Event.new(eventData["name"]["text"], eventData["url"], eventData["description"]["text"])
+        eventItems.push(event);
+      end
+      render json: eventItems, status: 200
     end
 
 
