@@ -87,7 +87,7 @@ module V1
         :password,
         :password_confirmation,
         :username,
-        :interests
+        interests: []
       )
     end
 
