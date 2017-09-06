@@ -25,7 +25,6 @@ class Event
   end
 
   def set_date
-    puts @description.class
     @date = string_between_markers("When:", "Speaker:", @description)
     @date
   end

@@ -25,7 +25,6 @@ module V1
       eventResponse = JSON.parse(RestClient.get(link));
       eventItems = []
       eventResponse["events"].each do |eventData|
-        puts eventData["description"]["text"].class
         event = Event.new(eventData["name"]["text"], eventData["url"], eventData["description"]["text"])
         eventItems.push(event);
       end

@@ -13,7 +13,6 @@ class UserMailer < ApplicationMailer
 
   def confirm_email(user)
     @user = user
-    puts @user.confirmation_token
     @linkUrl = "#{APP_URL}/confirm_email/#{@user.confirmation_token}"
     mail :to => @user.email, :subject => "Email Confirmation with When to Jump"
   end

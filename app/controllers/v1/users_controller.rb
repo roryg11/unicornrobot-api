@@ -20,7 +20,6 @@ module V1
     end
 
     def profile
-      puts current_user.id
       render json: current_user, serializer: V1::UserSerializer, status: 201
     end
 
